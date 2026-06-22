@@ -82,7 +82,7 @@ const TaskDone = ({ doneTasks, setDoneTasks }) => {
   }
 
   return (
-    <div className="rounded-2xl bg-gray-200 border-double border-green-800 text-white w-full md:w-[30%]">
+    <div className="rounded-2xl bg-sky-100 border-double border-green-800 text-white w-full md:w-[30%]">
       <div className="flex items-center justify-between px-4 py-2 border-b border-gray-400">
         <h2 className="text-2xl font-bold text-slate-600 uppercase tracking-wider">
           Done
