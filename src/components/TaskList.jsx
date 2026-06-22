@@ -1,97 +1,114 @@
 import React from 'react'
 
-const TaskList = ({ tasks, setTasks, setInProgressTasks }) => {
+const TaskList = ({
+  tasks,
+  setTasks,
+  setInProgressTasks,
+  setDoneTasks,
+}) => {
   const handleDeleteTask = (index) => {
     const confirmDelete = window.confirm(
-      'Are you sure you want to delete this task?',
+      'Are you sure you want to delete this task?'
     )
 
     if (!confirmDelete) return
 
-    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index))
+    setTasks((prev) => prev.filter((_, i) => i !== index))
   }
 
   const handleMoveToInProgress = (index) => {
     const confirmMove = window.confirm(
-      'Are you sure you want to move this task to In Progress?',
+      'Move task to In Progress?'
     )
+
+    if (!confirmMove) return
+
     const taskToMove = tasks[index]
-    console.log('Moving task to In Progress:', taskToMove)
+
     setInProgressTasks((prev) => [...prev, taskToMove])
 
-    setTasks((prev) => prev.filter((_, i) => i !== index))
+    setTasks((prev) =>
+      prev.filter((_, i) => i !== index)
+    )
   }
+
   const handleMoveToDone = (index) => {
-    // Implement logic to move task to "Done"
-    // You can update the task's status or move it to a different list
+    const confirmMove = window.confirm(
+      'Move task to Done?'
+    )
+
+    if (!confirmMove) return
+
+    const taskToMove = tasks[index]
+
+    setDoneTasks((prev) => [...prev, taskToMove])
+
+    setTasks((prev) =>
+      prev.filter((_, i) => i !== index)
+    )
   }
+
   return (
-    <div className="rounded-2xl bg-gray-200 border-double border-green-800 text-white w-full md:w-[30%] ">
+    <div className="rounded-2xl bg-gray-200 w-full md:w-[30%]">
       <div className="flex items-center justify-between px-4 py-2 border-b border-gray-400">
-        <div className="text-2xl font-bold  text-slate-600 uppercase tracking-wider">
+        <h2 className="text-2xl font-bold text-slate-600">
           Task List
-        </div>
-        <div className="w-8 h-8 rounded-full bg-green-400 flex items-center justify-center ">
+        </h2>
+
+        <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
           {tasks.length}
         </div>
       </div>
-      <div className="m-4 pb-2 px-4">
+
+      <div className="m-4">
         {tasks.length === 0 ? (
           <p className="text-gray-800">No tasks added yet.</p>
         ) : (
           tasks.map((task, index) => (
             <div
               key={index}
-              className="mb-2 p-3 bg-white text-black rounded-2xl flex flex-col gap-4 "
+              className="mb-3 p-3 bg-white text-black rounded-2xl flex flex-col gap-4"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex justify-between">
                 <span
-                  className={` py-2 text-sm rounded-full text-white w-1/3 text-center ${
+                  className={`py-2 text-sm rounded-full text-white w-1/3 text-center ${
                     task.priority === 'High'
                       ? 'bg-red-500'
                       : task.priority === 'Medium'
-                        ? 'bg-yellow-500'
-                        : 'bg-green-500'
+                      ? 'bg-yellow-500'
+                      : 'bg-green-500'
                   }`}
                 >
                   {task.priority}
-                </span>
-                <div
-                  className="text-gray-500 text-xl w-6 h-6 flex items-center justify-center rounded-full bg-gray-300 cursor-pointer"
-                  onClick={() => handleDeleteTask(index)}
-                >
-                  x
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="capitalize leading-2 text-xl">
-                  {task.text}
                 </span>
 
-                {/* <span
-                  className={`px-2 py-1 text-xs rounded-full text-white ${
-                    task.priority === 'High'
-                      ? 'bg-red-500'
-                      : task.priority === 'Medium'
-                        ? 'bg-yellow-500'
-                        : 'bg-green-500'
-                  }`}
-                >
-                  {task.priority}
-                </span> */}
-                {/* <div className="text-gray-500 text-xl w-6 h-6 flex items-center justify-center rounded-full bg-gray-300 cursor-pointer">
-               x
-                </div> */}
-              </div>
-              <div className="flex gap-4 ">
                 <button
-                  className="bg-blue-600 text-white px-2 border border-gray-500 py-1 texy-sm rounded-2xl"
-                  onClick={() => handleMoveToInProgress(index)}
+                  onClick={() => handleDeleteTask(index)}
+                  className="w-6 h-6 rounded-full bg-gray-300"
                 >
-                  Move In Progress
+                  ×
                 </button>
-                <button className="bg-green-600 text-white px-2 border border-gray-500 py-1 texy-sm rounded-2xl">
-                  Move to Done
+              </div>
+
+              <span className="text-xl capitalize">
+                {task.text}
+              </span>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() =>
+                    handleMoveToInProgress(index)
+                  }
+                  className="bg-blue-600 text-white px-3 py-1 rounded-xl"
+                >
+                  In Progress
+                </button>
+
+                <button
+                  onClick={() => handleMoveToDone(index)}
+                  className="bg-green-600 text-white px-3 py-1 rounded-xl"
+                >
+                  Done
                 </button>
               </div>
             </div>

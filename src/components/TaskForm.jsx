@@ -19,8 +19,8 @@ const TaskForm = ({ setTasks }) => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      <div className="my-4 w-full md:w-[60%] bg-white   rounded-2xl">
+    <div className="flex flex-col md:flex-row gap-4  mx-auto w-full md:w-[90%] rounded-2xl md:ml-30 md:mt-10">
+      <div className="my-4 w-full md:w-[60%] bg-white rounded-2xl">
 
 
         <form
