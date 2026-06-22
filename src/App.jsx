@@ -12,7 +12,7 @@ const App = () => {
 
       <TaskForm setTasks={setTasks} />
 
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks}  setTasks={setTasks}/>
     </div>
   )
 }
