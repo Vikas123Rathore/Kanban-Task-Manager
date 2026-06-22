@@ -1,28 +1,48 @@
 import React from 'react'
 
-const Header = () => {
+const Header = ({ clearAllData }) => {
   return (
-    <header className="w-full py-4 border-b border-gray-200 bg-yellow-200 rounded-2xl shadow-sm px-4 ">
-      <div className="flex items-center justify-start gap-3">
+    <header className="relative overflow-hidden rounded-3xl border border-white/20 bg-linear-to-br from-slate-900/60 via-slate-800/40 to-slate-900/60 px-6 py-5 backdrop-blur-lg shadow-[0_8px_32px_rgba(0,0,0,0.1)] md:px-8 md:py-6">
+      <div className="absolute -left-20 -top-20 h-40 w-40 rounded-full bg-lime-400/20 blur-3xl" />
+      <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-emerald-300/10 blur-3xl" />
 
-        {/* Logo */}
-        <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center">
-          <span className="text-green-500 font-extrabold text-xl">
-            KB
-          </span>
+      <div className="relative z-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex items-center gap-4">
+          {/* Logo */}
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-lime-400 to-emerald-500 shadow-lg ring-2 ring-lime-300/30">
+            <div className="absolute inset-0.5 rounded-full bg-linear-to-br from-lime-300 to-emerald-400" />
+            <span className="relative font-black text-2xl text-slate-900">
+              KB
+            </span>
+          </div>
+
+          {/* App Name & Tagline */}
+          <div>
+            <h1 className="text-4xl font-black leading-none tracking-tight md:text-5xl">
+              <span className="bg-linear-to-r from-lime-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                Kanban
+              </span>
+            </h1>
+            <p className="mt-1 text-sm font-medium text-slate-300 md:text-base">
+              Task Manager
+            </p>
+          </div>
         </div>
 
-        {/* App Name */}
-        <h1 className="text-3xl md:text-5xl font-extrabold uppercase tracking-wider">
-          <span className="text-black">Kan</span>
-          <span className="text-green-800">ban</span>
-        </h1>
-
+        {/* Tagline */}
+        <div className="hidden flex-col items-end gap-1 md:flex">
+          <p className="text-right text-sm font-semibold uppercase tracking-widest text-emerald-300/90">
+            Organize • Track • Deliver
+          </p>
+          <button
+            onClick={clearAllData}
+            className="bg-red-500 px-4 py-2 rounded-xl text-sm font-semibold text-white hover:bg-red-600 transition-colors cursor-pointer"
+          >
+            Clear All
+          </button>
+          {/* <div className="h-1 w-12 rounded-full bg-linear-to-r from-lime-400 to-emerald-400" /> */}
+        </div>
       </div>
-
-      <p className=" text-red-800 mt-2">
-        Organize, Track & Manage Your Tasks
-      </p>
     </header>
   )
 }

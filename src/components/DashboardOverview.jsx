@@ -70,7 +70,7 @@ const DashboardOverview = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm sm:grid-cols-4 lg:min-w-[28rem]">
+          <div className="grid grid-cols-2 gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm sm:grid-cols-4 lg:min-w-md">
             <div>
               <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
                 Total
@@ -162,7 +162,7 @@ const DashboardOverview = ({
                       </p>
                     </div>
                     <div
-                      className={`rounded-full bg-gradient-to-br ${stage.tone} px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]`}
+                      className={`rounded-full bg-linear-to-br ${stage.tone} px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]`}
                     >
                       {stage.label}
                     </div>
@@ -185,7 +185,7 @@ const DashboardOverview = ({
           </div>
 
           <div className="grid gap-4">
-            <div className="rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-lime-400/15 to-slate-900 p-5">
+            <div className="rounded-[1.75rem] border border-white/10 bg-linear-to-br from-lime-400/15 to-slate-900 p-5">
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-lime-200/90">
                 Priority load
               </p>

@@ -49,7 +49,7 @@ const TaskList = ({
   }
 
   return (
-    <div className="rounded-2xl bg-amber-200 w-full md:w-[30%]">
+    <div className="rounded-2xl bg-linear-to-br from-lime-300 to-emerald-400 w-full md:w-[30%]">
       <div className="flex items-center justify-between px-4 py-2 border-b border-gray-400">
         <h2 className="text-2xl font-bold text-slate-600">
           Task List

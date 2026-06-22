@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './components/Header'
 import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
@@ -7,13 +7,46 @@ import TaskDone from './components/TaskDone'
 import DashboardOverview from './components/DashboardOverview'
 
 const App = () => {
-  const [tasks, setTasks] = useState([])
-  const [inProgressTasks, setInProgressTasks] = useState([])
-  const [doneTasks, setDoneTasks] = useState([])
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('tasks')
+
+    return savedTasks ? JSON.parse(savedTasks) : []
+  })
+  const [inProgressTasks, setInProgressTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('inProgressTasks')
+
+    return savedTasks ? JSON.parse(savedTasks) : []
+  })
+  const [doneTasks, setDoneTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('doneTasks')
+
+    return savedTasks ? JSON.parse(savedTasks) : []
+  })
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
+
+  useEffect(() => {
+    localStorage.setItem('inProgressTasks', JSON.stringify(inProgressTasks))
+  }, [inProgressTasks])
+
+  useEffect(() => {
+    localStorage.setItem('doneTasks', JSON.stringify(doneTasks))
+  }, [doneTasks])
+
+  const clearAllData = () => {
+    localStorage.removeItem('tasks')
+    localStorage.removeItem('inProgressTasks')
+    localStorage.removeItem('doneTasks')
+
+    setTasks([])
+    setInProgressTasks([])
+    setDoneTasks([])
+  }
 
   return (
     <div className="mx-auto min-h-screen px-4 py-6 text-slate-900 bg-lime-200 md:px-8">
-      <Header />
+      <Header clearAllData={clearAllData} />
 
       <div className="mt-6 md:mx-24">
         <DashboardOverview
