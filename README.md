@@ -55,7 +55,7 @@ git clone https://github.com/Vikas123Rathore/Kanban-Task-Manager
 ```
 ## Live Demo link
 ```bash
- https://kanbantaskm.netlify.app/
+liveDemo  https://kanbantaskm.netlify.app/
  ```
 
 ### Navigate to Project
