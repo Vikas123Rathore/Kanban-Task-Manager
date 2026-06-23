@@ -51,7 +51,7 @@ A modern Kanban Task Manager built with React, Vite, and Tailwind CSS. Manage ta
 ### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/kanban-task-manager.git
+git clone https://github.com/Vikas123Rathore/Kanban-Task-Manager
 ```
 
 ### Navigate to Project
