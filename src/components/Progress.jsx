@@ -4,35 +4,37 @@ const Progress = ({
   inProgressTasks,
   setInProgressTasks,
   setDoneTasks,
+  searchTerm,
 }) => {
-  const handleDeleteTask = (index) => {
+  const filteredTasks = inProgressTasks.filter((task) =>
+    task.text.toLowerCase().includes((searchTerm || '').toLowerCase()),
+  )
+  const handleDeleteTask = (task) => {
     setInProgressTasks((prev) =>
-      prev.filter((_, i) => i !== index)
+      prev.filter(
+        (t) => !(t.text === task.text && t.priority === task.priority),
+      ),
     )
   }
 
-  const handleDoneTask = (index) => {
-    const confirmMove = window.confirm(
-      'Move task to Done?'
-    )
+  const handleDoneTask = (task) => {
+    const confirmMove = window.confirm('Move task to Done?')
 
     if (!confirmMove) return
 
-    const taskToMove = inProgressTasks[index]
-
-    setDoneTasks((prev) => [...prev, taskToMove])
+    setDoneTasks((prev) => [...prev, task])
 
     setInProgressTasks((prev) =>
-      prev.filter((_, i) => i !== index)
+      prev.filter(
+        (t) => !(t.text === task.text && t.priority === task.priority),
+      ),
     )
   }
 
   return (
     <div className="rounded-2xl bg-linear-to-r from-emerald-100 to-emerald-900 w-full md:w-[30%]">
       <div className="flex items-center justify-between px-4 py-2 border-b border-gray-400">
-        <h2 className="text-2xl font-bold text-slate-600">
-          In Progress
-        </h2>
+        <h2 className="text-2xl font-bold text-slate-600">In Progress</h2>
 
         <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
           {inProgressTasks.length}
@@ -40,12 +42,10 @@ const Progress = ({
       </div>
 
       <div className="m-4">
-        {inProgressTasks.length === 0 ? (
-          <p className="text-gray-800">
-            No tasks in progress.
-          </p>
+        {filteredTasks.length === 0 ? (
+          <p className="text-gray-800">No tasks in progress.</p>
         ) : (
-          inProgressTasks.map((task, index) => (
+          filteredTasks.map((task, index) => (
             <div
               key={index}
               className="mb-3 p-3 bg-white text-black rounded-2xl flex flex-col gap-4"
@@ -56,27 +56,25 @@ const Progress = ({
                     task.priority === 'High'
                       ? 'bg-red-500'
                       : task.priority === 'Medium'
-                      ? 'bg-yellow-500'
-                      : 'bg-green-500'
+                        ? 'bg-yellow-500'
+                        : 'bg-green-500'
                   }`}
                 >
                   {task.priority}
                 </span>
 
                 <button
-                  onClick={() => handleDeleteTask(index)}
+                  onClick={() => handleDeleteTask(task)}
                   className="w-6 h-6 rounded-full bg-gray-300"
                 >
                   ×
                 </button>
               </div>
 
-              <span className="text-xl capitalize">
-                {task.text}
-              </span>
+              <span className="text-xl capitalize">{task.text}</span>
 
               <button
-                onClick={() => handleDoneTask(index)}
+                onClick={() => handleDoneTask(task)}
                 className="bg-green-600 text-white px-3 py-1 rounded-xl w-fit"
               >
                 Move To Done

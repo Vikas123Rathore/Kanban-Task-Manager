@@ -7,6 +7,7 @@ import TaskDone from './components/TaskDone'
 import DashboardOverview from './components/DashboardOverview'
 
 const App = () => {
+  const [searchTerm, setSearchTerm] = useState('')
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem('tasks')
 
@@ -56,7 +57,12 @@ const App = () => {
         />
       </div>
 
-      <TaskForm setTasks={setTasks} />
+      <TaskForm
+        setTasks={setTasks}
+        tasks={tasks}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
 
       <div className="flex flex-col md:flex-row gap-4 mt-4 mx-auto w-full md:w-[90%] rounded-2xl md:ml-30">
         <TaskList
@@ -64,15 +70,21 @@ const App = () => {
           setTasks={setTasks}
           setInProgressTasks={setInProgressTasks}
           setDoneTasks={setDoneTasks}
+          searchTerm={searchTerm}
         />
 
         <Progress
           inProgressTasks={inProgressTasks}
           setInProgressTasks={setInProgressTasks}
           setDoneTasks={setDoneTasks}
+          searchTerm={searchTerm}
         />
 
-        <TaskDone doneTasks={doneTasks} setDoneTasks={setDoneTasks} />
+        <TaskDone
+          doneTasks={doneTasks}
+          setDoneTasks={setDoneTasks}
+          searchTerm={searchTerm}
+        />
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const TaskForm = ({ setTasks }) => {
+const TaskForm = ({ setTasks, searchTerm, setSearchTerm ,tasks}) => {
   const [taskText, setTaskText] = useState('')
   const [priority, setPriority] = useState('Medium')
   const handleSubmit = (e) => {
@@ -18,11 +18,13 @@ const TaskForm = ({ setTasks }) => {
     setPriority('Medium')
   }
 
+  const filteredTasks = tasks.filter((task) =>
+    task.text.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
+
   return (
     <div className="flex flex-col md:flex-row gap-4  mx-auto w-full md:w-[90%] rounded-2xl md:ml-30 md:mt-10">
       <div className="my-4 w-full md:w-[60%] bg-white rounded-2xl">
-
-
         <form
           onSubmit={handleSubmit}
           className="flex flex-col md:flex-row items-end gap-4  px-8 py-6 rounded-2xl"
@@ -83,6 +85,8 @@ const TaskForm = ({ setTasks }) => {
         <input
           type="text"
           placeholder="Search tasks..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-md bg-white text-gray-800 outline-none mb-4"
         />
       </div>
