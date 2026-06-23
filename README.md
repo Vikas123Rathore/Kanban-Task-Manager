@@ -53,6 +53,10 @@ A modern Kanban Task Manager built with React, Vite, and Tailwind CSS. Manage ta
 ```bash
 git clone https://github.com/Vikas123Rathore/Kanban-Task-Manager
 ```
+## Live Demo link
+```bash
+ https://kanbantaskm.netlify.app/
+ ```
 
 ### Navigate to Project
 
