@@ -6,35 +6,44 @@ import Progress from './components/Progress'
 import TaskDone from './components/TaskDone'
 import DashboardOverview from './components/DashboardOverview'
 
+// Main App Component - Manages all task states and handles local storage persistence
 const App = () => {
+  // State for search functionality
   const [searchTerm, setSearchTerm] = useState('')
+
+  // State for tasks that are not started yet - loads from localStorage
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem('tasks')
-
     return savedTasks ? JSON.parse(savedTasks) : []
   })
+
+  // State for tasks that are currently in progress - loads from localStorage
   const [inProgressTasks, setInProgressTasks] = useState(() => {
     const savedTasks = localStorage.getItem('inProgressTasks')
-
     return savedTasks ? JSON.parse(savedTasks) : []
   })
+
+  // State for tasks that are completed - loads from localStorage
   const [doneTasks, setDoneTasks] = useState(() => {
     const savedTasks = localStorage.getItem('doneTasks')
-
     return savedTasks ? JSON.parse(savedTasks) : []
   })
+  // Save tasks to localStorage whenever tasks state changes
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
+  // Save inProgressTasks to localStorage whenever state changes
   useEffect(() => {
     localStorage.setItem('inProgressTasks', JSON.stringify(inProgressTasks))
   }, [inProgressTasks])
 
+  // Save doneTasks to localStorage whenever state changes
   useEffect(() => {
     localStorage.setItem('doneTasks', JSON.stringify(doneTasks))
   }, [doneTasks])
 
+  // Function to clear all data from localStorage and reset all states
   const clearAllData = () => {
     localStorage.removeItem('tasks')
     localStorage.removeItem('inProgressTasks')

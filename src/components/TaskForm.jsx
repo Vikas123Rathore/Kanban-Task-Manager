@@ -1,35 +1,49 @@
 import React, { useState } from 'react'
 
-const TaskForm = ({ setTasks, searchTerm, setSearchTerm ,tasks}) => {
+// TaskForm Component - Handles task creation and search functionality
+const TaskForm = ({ setTasks, searchTerm, setSearchTerm, tasks }) => {
+  // State for the input task text
   const [taskText, setTaskText] = useState('')
+  // State for task priority (High, Medium, Low)
   const [priority, setPriority] = useState('Medium')
+
+  // Handle form submission for adding a new task
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    // Validate that task text is not empty
     if (!taskText.trim()) return
+
+    // Create new task object with text and priority
     const newTask = {
       text: taskText,
       priority: priority,
     }
     console.log('Task:', taskText, 'Priority:', priority)
+
+    // Add new task to tasks array
     setTasks((prevTasks) => [...prevTasks, newTask])
 
+    // Reset form fields
     setTaskText('')
     setPriority('Medium')
   }
 
+  // Filter tasks based on search term (case-insensitive)
   const filteredTasks = tasks.filter((task) =>
     task.text.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
   return (
     <div className="flex flex-col md:flex-row gap-4  mx-auto w-full md:w-[90%] rounded-2xl md:ml-30 md:mt-10">
+      {/* Task Input Section */}
       <div className="my-4 w-full md:w-[60%] bg-white rounded-2xl">
+        {/* Form for adding new tasks */}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col md:flex-row items-end gap-4  px-8 py-6 rounded-2xl"
         >
-          {/* Task Input */}
+          {/* Task Text Input */}
           <div className="w-full md:w-1/3">
             <label
               htmlFor="task"
@@ -48,7 +62,7 @@ const TaskForm = ({ setTasks, searchTerm, setSearchTerm ,tasks}) => {
             />
           </div>
 
-          {/* Priority */}
+          {/* Priority Dropdown */}
           <div className="w-full md:w-1/4">
             <label
               htmlFor="priority"
@@ -69,7 +83,7 @@ const TaskForm = ({ setTasks, searchTerm, setSearchTerm ,tasks}) => {
             </select>
           </div>
 
-          {/* Button */}
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full md:w-auto bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 cursor-pointer"
@@ -79,9 +93,10 @@ const TaskForm = ({ setTasks, searchTerm, setSearchTerm ,tasks}) => {
         </form>
       </div>
 
-      {/* search-bar */}
+      {/* Search Section */}
       <div className="my-4 w-full md:w-[30%] bg-white px-2 py-4 rounded-2xl">
         <h2 className="text-xl font-bold mb-4 text-slate-600">Search Tasks</h2>
+        {/* Search Input - Filters tasks in real-time */}
         <input
           type="text"
           placeholder="Search tasks..."
