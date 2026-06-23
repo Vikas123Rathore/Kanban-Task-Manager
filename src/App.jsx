@@ -60,6 +60,12 @@ const App = () => {
       <div className="mx-auto min-h-screen px-4 py-6 text-slate-900 bg-lime-200 md:px-8">
         <Header clearAllData={clearAllData} />
 
+        <TaskForm
+          setTasks={setTasks}
+          tasks={tasks}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
         <div className="mt-6 md:mx-24">
           <DashboardOverview
             tasks={tasks}
@@ -68,12 +74,12 @@ const App = () => {
           />
         </div>
 
-        <TaskForm
+        {/* <TaskForm
           setTasks={setTasks}
           tasks={tasks}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-        />
+        /> */}
 
         <div className="flex flex-col md:flex-row gap-4 mt-4 mx-auto w-full md:w-[90%] rounded-2xl md:ml-30">
           <TaskList
