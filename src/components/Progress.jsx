@@ -1,4 +1,5 @@
 import React from 'react'
+import toast from 'react-hot-toast'
 
 const Progress = ({
   inProgressTasks,
@@ -19,6 +20,7 @@ const Progress = ({
         (t) => !(t.text === task.text && t.priority === task.priority),
       ),
     )
+    toast.error(`"${task.text}" removed from In Progress`)
   }
 
   // Move task from In Progress to Done
@@ -36,6 +38,7 @@ const Progress = ({
         (t) => !(t.text === task.text && t.priority === task.priority),
       ),
     )
+    toast.success(`"${task.text}" completed! `)
   }
 
   return (

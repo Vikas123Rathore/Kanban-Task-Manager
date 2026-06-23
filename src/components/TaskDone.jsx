@@ -1,4 +1,5 @@
 import React from 'react'
+import toast from 'react-hot-toast'
 
 // TaskDone Component - Displays completed tasks
 const TaskDone = ({ doneTasks, setDoneTasks, searchTerm }) => {
@@ -23,6 +24,7 @@ const TaskDone = ({ doneTasks, setDoneTasks, searchTerm }) => {
         (t) => !(t.text === task.text && t.priority === task.priority),
       ),
     )
+    toast.error(`"${task.text}" removed from completed tasks`)
   }
 
   return (

@@ -1,4 +1,5 @@
 import React from 'react'
+import toast from 'react-hot-toast'
 
 // TaskList Component - Displays tasks that haven't been started yet
 const TaskList = ({
@@ -23,8 +24,12 @@ const TaskList = ({
     // Exit if user cancels
     if (!confirmDelete) return
 
+    // Get task name for toast
+    const taskName = tasks[index].text
+
     // Remove task from array
     setTasks((prev) => prev.filter((_, i) => i !== index))
+    toast.success(`Task "${taskName}" deleted!`)
   }
 
   // Move task from Task List to In Progress
@@ -40,6 +45,7 @@ const TaskList = ({
 
     // Remove task from task list
     setTasks((prev) => prev.filter((_, i) => i !== index))
+    toast.success(`"${taskToMove.text}" moved to In Progress! 🚀`)
   }
 
   // Move task from Task List directly to Done
@@ -55,6 +61,7 @@ const TaskList = ({
 
     // Remove task from task list
     setTasks((prev) => prev.filter((_, i) => i !== index))
+    toast.success(`"${taskToMove.text}" completed! 🎉`)
   }
 
   return (

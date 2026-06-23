@@ -1,4 +1,5 @@
 import React from 'react'
+import toast from 'react-hot-toast'
 
 const Header = ({ clearAllData }) => {
   return (
@@ -35,7 +36,10 @@ const Header = ({ clearAllData }) => {
             Organize • Track • Deliver
           </p>
           <button
-            onClick={clearAllData}
+            onClick={() => {
+              clearAllData()
+              toast.success('All tasks cleared!')
+            }}
             className="bg-red-500 px-4 py-2 rounded-xl text-sm font-semibold text-white hover:bg-red-600 transition-colors cursor-pointer"
           >
             Clear All

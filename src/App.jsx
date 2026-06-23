@@ -5,7 +5,7 @@ import TaskList from './components/TaskList'
 import Progress from './components/Progress'
 import TaskDone from './components/TaskDone'
 import DashboardOverview from './components/DashboardOverview'
-
+import { Toaster } from 'react-hot-toast'
 // Main App Component - Manages all task states and handles local storage persistence
 const App = () => {
   // State for search functionality
@@ -55,47 +55,50 @@ const App = () => {
   }
 
   return (
-    <div className="mx-auto min-h-screen px-4 py-6 text-slate-900 bg-lime-200 md:px-8">
-      <Header clearAllData={clearAllData} />
+    <>
+      <Toaster position="top-right" />
+      <div className="mx-auto min-h-screen px-4 py-6 text-slate-900 bg-lime-200 md:px-8">
+        <Header clearAllData={clearAllData} />
 
-      <div className="mt-6 md:mx-24">
-        <DashboardOverview
-          tasks={tasks}
-          inProgressTasks={inProgressTasks}
-          doneTasks={doneTasks}
-        />
-      </div>
+        <div className="mt-6 md:mx-24">
+          <DashboardOverview
+            tasks={tasks}
+            inProgressTasks={inProgressTasks}
+            doneTasks={doneTasks}
+          />
+        </div>
 
-      <TaskForm
-        setTasks={setTasks}
-        tasks={tasks}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
-
-      <div className="flex flex-col md:flex-row gap-4 mt-4 mx-auto w-full md:w-[90%] rounded-2xl md:ml-30">
-        <TaskList
-          tasks={tasks}
+        <TaskForm
           setTasks={setTasks}
-          setInProgressTasks={setInProgressTasks}
-          setDoneTasks={setDoneTasks}
+          tasks={tasks}
           searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
         />
 
-        <Progress
-          inProgressTasks={inProgressTasks}
-          setInProgressTasks={setInProgressTasks}
-          setDoneTasks={setDoneTasks}
-          searchTerm={searchTerm}
-        />
+        <div className="flex flex-col md:flex-row gap-4 mt-4 mx-auto w-full md:w-[90%] rounded-2xl md:ml-30">
+          <TaskList
+            tasks={tasks}
+            setTasks={setTasks}
+            setInProgressTasks={setInProgressTasks}
+            setDoneTasks={setDoneTasks}
+            searchTerm={searchTerm}
+          />
 
-        <TaskDone
-          doneTasks={doneTasks}
-          setDoneTasks={setDoneTasks}
-          searchTerm={searchTerm}
-        />
+          <Progress
+            inProgressTasks={inProgressTasks}
+            setInProgressTasks={setInProgressTasks}
+            setDoneTasks={setDoneTasks}
+            searchTerm={searchTerm}
+          />
+
+          <TaskDone
+            doneTasks={doneTasks}
+            setDoneTasks={setDoneTasks}
+            searchTerm={searchTerm}
+          />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

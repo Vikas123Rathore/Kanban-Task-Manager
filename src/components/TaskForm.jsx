@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import toast from 'react-hot-toast'
 // TaskForm Component - Handles task creation and search functionality
 const TaskForm = ({ setTasks, searchTerm, setSearchTerm, tasks }) => {
   // State for the input task text
@@ -12,7 +12,10 @@ const TaskForm = ({ setTasks, searchTerm, setSearchTerm, tasks }) => {
     e.preventDefault()
 
     // Validate that task text is not empty
-    if (!taskText.trim()) return
+    if (!taskText.trim()) {
+      toast.error('Please enter a task')
+      return
+    }
 
     // Create new task object with text and priority
     const newTask = {
@@ -23,6 +26,9 @@ const TaskForm = ({ setTasks, searchTerm, setSearchTerm, tasks }) => {
 
     // Add new task to tasks array
     setTasks((prevTasks) => [...prevTasks, newTask])
+
+    // Show success toast
+    toast.success(`Task "${taskText}" added successfully!`)
 
     // Reset form fields
     setTaskText('')
@@ -59,6 +65,7 @@ const TaskForm = ({ setTasks, searchTerm, setSearchTerm, tasks }) => {
               value={taskText}
               onChange={(e) => setTaskText(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded-md bg-white text-gray-800 outline-none capitalize"
+              required
             />
           </div>
 
