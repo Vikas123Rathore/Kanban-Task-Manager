@@ -75,7 +75,7 @@ const App = () => {
           setSearchTerm={setSearchTerm}
         />
 
-        <div className="flex flex-col md:flex-row gap-4 mt-4 mx-auto w-full md:w-[90%] rounded-2xl md:ml-30">
+        <div className="flex flex-col md:flex-row items-start gap-4 mt-4 mx-auto w-full md:w-[90%] rounded-2xl md:ml-30">
           <TaskList
             tasks={tasks}
             setTasks={setTasks}
